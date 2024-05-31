@@ -17,22 +17,17 @@ Output: 5, nums = [0,1,2,3,4,_,_,_,_,_]
 
 class RemoveDuplicatesFromSortedArray {
     public int removeDuplicates(int[] nums) {
-        int i = 0;
-        int j = 1;
-        int k = 0;
-        while (j < nums.length) {
-            if (nums[i] == nums[j]) {
-                j++;
-            } else {
-                int temp = nums[i + 1];
-                nums[i + 1] = nums[j];
-                nums[j] =  temp;
-                i++;
-                j++;
-                k++;
-            }
+        if (nums.length == 0) {
+            return 0; // Empty array
         }
 
-        return k + 1;
+        int j = 1; // pointer for the next unique element
+        for (int i = 1; i < nums.length; i++) {
+            if (nums[i] != nums[j - 1]) {
+                nums[j] = nums[i]; // overwrite with the next unique element
+                j++; // move the pointer to the next position
+            }
+        }
+        return j;
     }
 }
